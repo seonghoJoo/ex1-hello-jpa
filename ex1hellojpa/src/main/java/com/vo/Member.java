@@ -40,6 +40,9 @@ public class Member{
     private String description;
 
     @Transient
+    private int temp1;
+
+    @Transient
     private int temp;
 
     public Member() {
