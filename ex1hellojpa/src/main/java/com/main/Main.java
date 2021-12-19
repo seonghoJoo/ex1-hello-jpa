@@ -19,6 +19,7 @@ public class Main {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
+            //member 찾기
 //            Member member = new Member();
 //            member.setId(1L);
 //            member.setName("memberA");
