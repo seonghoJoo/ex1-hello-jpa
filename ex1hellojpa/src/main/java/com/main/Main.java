@@ -1,6 +1,7 @@
 package com.main;
 
 import com.vo.Member;
+import com.vo.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,16 +20,31 @@ public class Main {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-//            Member member = new Member();
-//            member.setId(1L);
-//            member.setName("memberA");
-//            em.persist(member);
+            //저장
+            Team team = new Team();
+            team.setName("TeamA");
+            //team.getMembers().add(member);
+            em.persist(team);
+
+            Member member = new Member();
+            member.setName("member1");
+            member.setTeam(team);
+            em.persist(member);
 
 
-            Member findMember = em.find(Member.class, 1L);
-            System.out.println("findMember.id = " + findMember.getId());
-            System.out.println("findMember.name = " + findMember.getName());
-            findMember.setName("HelloJPA");
+            //테스트 위함
+            em.flush();
+            em.clear();
+
+            // 조회
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+
+
+            for(Member m : members){
+                System.out.println("m = " + m.getName());
+            }
+
 
             tx.commit();
         }catch (Exception e){

@@ -27,8 +27,9 @@
             <property name="hibernate.id.new_generator_mappings" value="true" />
             <property name="hibernate.jdbc.batch_size" value="10"/>
 
+
             <!-- 엔티티와 테이블이 정상 맵핑 되었는지 확인 -->
-<!--            <property name="hibernate.hbm2ddl.auto" value="create" />-->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
 

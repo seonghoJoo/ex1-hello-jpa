@@ -17,36 +17,12 @@ import java.util.List;
 public class Member{
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-    generator = "MEMBER_SEQ_GENERATOR")
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
+    @Column(name = "MEMBER_ID")
     private Long id;
-
-    @Column(name="name")
     private String name;
-
-    private Integer age;
-
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob
-    private String description;
-
-    @Transient
-    private int temp1;
-
-    @Transient
-    private int temp;
-
-    public Member() {
-    }
 
     public Long getId() {
         return id;
@@ -64,59 +40,17 @@ public class Member{
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
+    // JPA에게 1:N N:M 인지 알려줘야함.
+    // Member입장에선 Many Team은 1
+    @ManyToOne
+    @JoinColumn(name="TEAM_ID")
+    private Team team;
+
+    public Team getTeam() {
+        return team;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public RoleType getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getTemp1() {
-        return temp1;
-    }
-
-    public void setTemp1(int temp1) {
-        this.temp1 = temp1;
-    }
-
-    public int getTemp() {
-        return temp;
-    }
-
-    public void setTemp(int temp) {
-        this.temp = temp;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
