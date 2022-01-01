@@ -1,8 +1,12 @@
 package com.vo;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Table(name="ORDERS")
@@ -11,6 +15,8 @@ import java.time.LocalDateTime;
         sequenceName = "ORDER_SEQ",
         initialValue = 1,allocationSize = 1
 )
+@Getter
+@Setter
 public class Order {
 
     @Id
@@ -18,8 +24,15 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @Column(name = "MEMBER_ID")
-    private Long memberId;
+    // 주문의 입장에서 Member는 한개에 Order는 여러개이므로
+    // 주문이 주인
+    @ManyToOne
+    @JoinColumn(name= "MEMBER_ID")
+    private Member member;
+
+    // 양방향 연관관계
+    @OneToMany(mappedBy = "ORDERS")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     @Column(name=  "ORDER_DATE")
     private LocalDateTime orderDate;
@@ -27,35 +40,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    public Long getId() {
-        return id;
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
-
-    public LocalDateTime getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
 }

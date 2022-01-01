@@ -1,6 +1,9 @@
 package com.main;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import com.vo.Member;
+import com.vo.Order;
+import com.vo.OrderItem;
 import com.vo.Team;
 
 import javax.persistence.EntityManager;
@@ -21,29 +24,8 @@ public class Main {
         tx.begin();
         try{
             //저장
-            Team team = new Team();
-            team.setName("TeamA");
-            //team.getMembers().add(member);
-            em.persist(team);
-
-            Member member = new Member();
-            member.setName("member1");
-            member.setTeam(team);
-            em.persist(member);
-
-
-            //테스트 위함
-            em.flush();
-            em.clear();
-
-            // 조회
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
-
-
-            for(Member m : members){
-                System.out.println("m = " + m.getName());
-            }
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
 
 
             tx.commit();
