@@ -17,8 +17,8 @@ import java.util.List;
 @Getter
 @Setter
 // 부모가 되도록 맵핑이 됨
-@Inheritance(strategy = InheritanceType.JOINED)
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 // DTYPE이 생김
 // 무얼 조인 해야할지 알게 됨
 // item이 들어온게 movie, album, book인지 구분 가능하게 해줌
