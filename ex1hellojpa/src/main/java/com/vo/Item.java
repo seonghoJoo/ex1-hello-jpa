@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="ITEM")
@@ -14,7 +16,14 @@ import javax.persistence.*;
 )
 @Getter
 @Setter
-public class Item {
+// 부모가 되도록 맵핑이 됨
+@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+// DTYPE이 생김
+// 무얼 조인 해야할지 알게 됨
+// item이 들어온게 movie, album, book인지 구분 가능하게 해줌
+@DiscriminatorColumn
+public abstract class Item {
 
     @Id
     @GeneratedValue
@@ -24,5 +33,8 @@ public class Item {
     private Long price;
     @Column(name = "STOCK_QUANTITY")
     private Long stockQuantity;
+
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
 
 }

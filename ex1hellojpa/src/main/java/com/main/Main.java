@@ -1,10 +1,7 @@
 package com.main;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
-import com.vo.Member;
-import com.vo.Order;
-import com.vo.OrderItem;
-import com.vo.Team;
+import com.vo.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,9 +20,20 @@ public class Main {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            //저장
-            Order order = new Order();
-            order.addOrderItem(new OrderItem());
+
+            Movie movie = new Movie();
+            movie.setDirector("봉준호");
+            movie.setActor("송강호");
+            movie.setName("기생충");
+            movie.setPrice(100000L);
+
+            em.persist(movie);
+
+            em.flush();
+            em.clear();
+
+            Movie find = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie = " + find);
 
 
             tx.commit();

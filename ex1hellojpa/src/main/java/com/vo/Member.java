@@ -40,8 +40,12 @@ public class Member{
     private Team team;
 
     // 양방향 연관관계 주었음.
-    @OneToMany(mappedBy = "MEMBER")
+    @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name="MEMBER_PRODUCT")
+    private List<Product> products = new ArrayList<>();
 
 
     // getter setter 관례가 아니라

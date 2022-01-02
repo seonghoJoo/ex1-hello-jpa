@@ -30,8 +30,12 @@ public class Order {
     @JoinColumn(name= "MEMBER_ID")
     private Member member;
 
+    @OneToOne
+    @JoinColumn(name="DELIVERY_ID")
+    private Delivery delivery;
+
     // 양방향 연관관계
-    @OneToMany(mappedBy = "ORDERS")
+    @OneToMany(mappedBy = "item")
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Column(name=  "ORDER_DATE")
