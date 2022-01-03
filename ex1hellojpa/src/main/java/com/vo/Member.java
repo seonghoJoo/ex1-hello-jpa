@@ -37,6 +37,8 @@ public class Member{
     // Member는 TeamId라는 외래키를 갖고 있다 주로 주인이 됨
     // 지연로딩 단순히 member만 조회하면 되는데 굳이 Team을 조회할 필요가 없을때
     // Proxy객체로 멤버를 조회함.
+
+    // 그러나 즉시로딩은 (fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="TEAM_ID")
     private Team team;

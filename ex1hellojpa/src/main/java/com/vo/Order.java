@@ -26,11 +26,11 @@ public class Order {
 
     // 주문의 입장에서 Member는 한개에 Order는 여러개이므로
     // 주문이 주인
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "MEMBER_ID")
     private Member member;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="DELIVERY_ID")
     private Delivery delivery;
 
