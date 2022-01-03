@@ -30,12 +30,13 @@ public class Order {
     @JoinColumn(name= "MEMBER_ID")
     private Member member;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    // order 생성시 delivery도 같이 영향을 주고 싶다.
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="DELIVERY_ID")
     private Delivery delivery;
 
     // 양방향 연관관계
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Column(name=  "ORDER_DATE")
