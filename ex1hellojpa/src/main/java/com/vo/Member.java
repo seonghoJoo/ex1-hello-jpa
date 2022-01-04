@@ -51,6 +51,9 @@ public class Member{
     @JoinTable(name="MEMBER_PRODUCT")
     private List<Product> products = new ArrayList<>();
 
+    //주소
+    @Embedded
+    private Address homeAddress;
 
     // getter setter 관례가 아니라
     // change라 하면 뭔가 중요해보임
