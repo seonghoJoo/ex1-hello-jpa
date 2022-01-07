@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -22,9 +20,7 @@ import java.util.List;
 public class Member{
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.AUTO
-    )
+    @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long id;
 
@@ -54,6 +50,18 @@ public class Member{
     //주소
     @Embedded
     private Address homeAddress;
+
+    //맵핑
+    @ElementCollection
+    // 맵핑 정보 
+    // 지연로딩 됨
+    @CollectionTable(name="FAVORITE_FOOD",joinColumns = @JoinColumn(name="MEMBER_ID"))
+    @Column(name="FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name="ADDRESS",joinColumns = @JoinColumn(name="MEMBER_ID"))
+    private List<Address> addressHistory = new ArrayList();
 
     // getter setter 관례가 아니라
     // change라 하면 뭔가 중요해보임
