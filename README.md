@@ -15,9 +15,9 @@
 ```select m from Member m join fetch m.team t```과 ```select m from Member m join m.team t```은 다르다.
 
 ```
-        List<Member> result = em.createQuery(query, Member.class).getResultList();
+List<Member> result = em.createQuery(query, Member.class).getResultList();
 
-        for(Member m : result){
-            System.out.println(m.getUsername() + " :  " + m.getTeam().getName() );
-        }
+for(Member m : result){
+    System.out.println(m.getUsername() + " :  " + m.getTeam().getName() );
+}
 ```
