@@ -12,5 +12,12 @@
 ## User(N) <-> Team(1) 
 ![image](https://user-images.githubusercontent.com/32606456/150733728-677af7dc-0758-43c9-9a7b-77b68420ad84.png)
 ### Fetch Join
-```select m from Member m join fetch m.team t```
+```select m from Member m join fetch m.team t```과 ```select m from Member m join m.team t```은 다르다.
 
+```
+        List<Member> result = em.createQuery(query, Member.class).getResultList();
+
+        for(Member m : result){
+            System.out.println(m.getUsername() + " :  " + m.getTeam().getName() );
+        }
+```
