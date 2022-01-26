@@ -31,4 +31,5 @@ for(Member m : result){
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<>();
-```을 사용하면 된다. 운에 따라서 1+1문제로 해결이 된다. 여기서 1~10, 12, 25, 50 ,100 해서 총 14개로 Batchsize 날리는 쿼리를 최적화 할수 있다.
+```
+을 사용하면 된다. 운에 따라서 1+1문제로 해결이 된다. 여기서 1~10, 12, 25, 50 ,100 해서 총 14개로 Batchsize 날리는 쿼리를 최적화 할수 있다.
