@@ -22,3 +22,13 @@ for(Member m : result){
     System.out.println(m.getUsername() + " :  " + m.getTeam().getName() );
 }
 ```
+
+### 페이징 문제
+페이징 처리를 하게 되면 데이터가 뻥튀기 한 값(객체)들을 가져오기 때문에 진정한 페이징 처리가 이뤄지지 않는다.
+따라서 페이징을 하고 싶다면 Team 위주로 ```select t from Team t```로 불러와야 한다. 하지만 여기서 N+1의 문제가 발생한다.
+이를 해결하기 위해 
+```    
+    @BatchSize(size = 100)
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<>();
+```을 사용하면 된다. 운에 따라서 1+1문제로 해결이 된다. 여기서 1~10, 12, 25, 50 ,100 해서 총 14개로 Batchsize 날리는 쿼리를 최적화 할수 있다.
