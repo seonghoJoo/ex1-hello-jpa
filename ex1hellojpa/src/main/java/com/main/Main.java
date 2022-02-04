@@ -2,11 +2,15 @@ package com.main;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
 import com.vo.*;
+import org.hibernate.Criteria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class Main {
@@ -21,19 +25,17 @@ public class Main {
         tx.begin();
         try{
 
-            Movie movie = new Movie();
-            movie.setDirector("봉준호");
-            movie.setActor("송강호");
-            movie.setName("기생충");
-            movie.setPrice(100000L);
+            Member member = new Member();
+            member.setName("member1");
+            em.persist(member);
 
-            em.persist(movie);
+            List<Member> resultList = em.createNativeQuery("select MEMBER_ID, city, street, zipcode from Member m").getResultList();
 
-            em.flush();
-            em.clear();
-
-            Movie find = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + find);
+            System.out.println("=============================");
+            for(Member m : resultList){
+                System.out.println("member1= " + m.getName());
+            }
+            System.out.println("=============================");
 
 
             tx.commit();
