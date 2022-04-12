@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.*;
 
-
+// JPA가 로딩될때 JPA 사용하는 애구나 인식을 함
 @Entity
 @Table(name="MEMBER")
 @SequenceGenerator(
